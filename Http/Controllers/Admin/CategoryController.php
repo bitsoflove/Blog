@@ -50,7 +50,7 @@ class CategoryController extends AdminBaseController
      */
     public function store(StoreCategoryRequest $request)
     {
-        $this->category->create($request->all());
+        $res = $this->category->create($request->all());
 
         flash(trans('blog::messages.category created'));
 

@@ -47,7 +47,7 @@
                     <select name="category_id" id="category" class="form-control">
                         <?php foreach ($categories as $category): ?>
                         <option value="{{ $category->id }}" {{ old('category_id', $post->category_id) == $category->id ? 'selected' : '' }}>
-                            {{ $category->name }}
+                            {{ $category->title }}
                         </option>
                         <?php endforeach; ?>
                     </select>
@@ -64,6 +64,8 @@
                 </div>
                 <div class='form-group{{ $errors->has("tags") ? ' has-error' : '' }}'>
                     {!! Form::label("tags", 'Tags:') !!}
+
+
                     <select name="tags[]" id="tags" class="input-tags" multiple>
                         <?php foreach ($post->tags()->get() as $tag): ?>
                             <?php $tagName = $tag->hasTranslation(locale()) === true ? $tag->translate(locale())->name : 'Not translated';  ?>

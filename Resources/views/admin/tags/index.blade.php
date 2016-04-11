@@ -46,7 +46,7 @@
                             {{--</td>--}}
                             <td>
                                 <a href="{{ URL::route('admin.blog.tag.edit', [$tag->id]) }}">
-                                    {{ $tag->name }}
+                                    {{ $tag->title }}
                                 </a>
                             </td>
                             <td>

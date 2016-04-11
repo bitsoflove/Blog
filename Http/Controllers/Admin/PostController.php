@@ -90,10 +90,11 @@ class PostController extends AdminBaseController
      */
     public function edit(Post $post)
     {
+
         $thumbnail = $this->file->findFileByZoneForEntity('thumbnail', $post);
         $categories = $this->category->allTranslatedIn(app()->getLocale());
         $statuses = $this->status->lists();
-
+        
         return view('blog::admin.posts.edit', compact('post', 'categories', 'thumbnail', 'statuses'));
     }
 

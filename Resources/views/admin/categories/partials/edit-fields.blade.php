@@ -1,9 +1,9 @@
 <div class="box-body">
-    <div class='form-group{{ $errors->has("{$lang}[name]") ? ' has-error' : '' }}'>
-        {!! Form::label("{$lang}[name]", trans('blog::category.form.name')) !!}
-        <?php $old = $category->hasTranslation($locale) ? $category->translate($lang)->name : '' ?>
-        {!! Form::text("{$lang}[name]", Input::old("{$lang}[name]", $old), ['class' => 'form-control', 'data-slug' => 'source', 'placeholder' => trans('blog::category.form.name')]) !!}
-        {!! $errors->first("{$lang}[name]", '<span class="help-block">:message</span>') !!}
+    <div class='form-group{{ $errors->has("{$lang}[title]") ? ' has-error' : '' }}'>
+        {!! Form::label("{$lang}[title]", trans('blog::category.form.name')) !!}
+        <?php $old = $category->hasTranslation($locale) ? $category->translate($lang)->title : '' ?>
+        {!! Form::text("{$lang}[title]", Input::old("{$lang}[title]", $old), ['class' => 'form-control', 'data-slug' => 'source', 'placeholder' => trans('blog::category.form.name')]) !!}
+        {!! $errors->first("{$lang}[title]", '<span class="help-block">:message</span>') !!}
     </div>
     <div class='form-group{{ $errors->has("{$lang}[slug]") ? ' has-error' : '' }}'>
            {!! Form::label("{$lang}[slug]", trans('blog::category.form.slug')) !!}

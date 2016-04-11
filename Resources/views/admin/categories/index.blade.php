@@ -46,7 +46,7 @@
                                 </td>
                                 <td>
                                     <a href="{{ route('admin.blog.category.edit', [$category->id]) }}">
-                                        {{ $category->name }}
+                                        {{ $category->title }}
                                     </a>
                                 </td>
                                 <td>

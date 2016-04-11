@@ -15,7 +15,7 @@ class EloquentTagRepository extends EloquentBaseRepository implements TagReposit
     public function findByName($name)
     {
         $tags = $this->model->with('translations')->whereHas('translations', function (Builder $q) use ($name) {
-            $q->where('name', 'like', "%$name%");
+            $q->where('title', 'like', "%$name%");
         })->get();
 
         return $this->setLocaleAsKey($tags);
@@ -48,7 +48,7 @@ class EloquentTagRepository extends EloquentBaseRepository implements TagReposit
     {
         $data = [
             $lang => [
-                'name' => $name,
+                'title' => $name,
                 'slug' => ''
             ],
         ];

@@ -77,9 +77,10 @@
             });
         },
         addTagSuccess: function (res) {
+            debugger;
             this.control.addOption({
                 id: res.id,
-                name: res.translations[0].name
+                name: res.translations[0].title
             });
             this.storeRefreshedSelectOptions();
             this.selectOptions.push(res.id);

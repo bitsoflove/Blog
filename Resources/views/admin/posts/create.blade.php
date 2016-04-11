@@ -45,7 +45,7 @@
                     {!! Form::label("category", 'Category:') !!}
                     <select name="category_id" id="category" class="form-control">
                         <?php foreach ($categories as $category): ?>
-                           <option value="{{ $category->id }}">{{ $category->name }}</option>
+                           <option value="{{ $category->id }}">{{ $category->title }}</option>
                         <?php endforeach; ?>
                     </select>
                 </div>

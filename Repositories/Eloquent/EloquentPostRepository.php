@@ -36,7 +36,7 @@ class EloquentPostRepository extends EloquentBaseRepository implements PostRepos
     {
         $post->update($data);
 
-        $post->tags()->sync(array_get($data, 'tags', []));
+        //$post->tags()->sync(array_get($data, 'tags', []));
 
         return $post;
     }
@@ -48,9 +48,12 @@ class EloquentPostRepository extends EloquentBaseRepository implements PostRepos
      */
     public function create($data)
     {
-        $post = $this->model->create($data);
+        $auth = \App::make('Modules\Core\Contracts\Authentication');
+        $author = $auth->check();
 
-        $post->tags()->sync(array_get($data, 'tags', []));
+        $data['author_id'] = $author->id;
+
+        $post = $this->model->create($data);
 
         return $post;
     }

@@ -13,7 +13,6 @@ class CreatePostRequest extends BaseFormRequest
     {
         return [
             'title' => 'required',
-            'slug' => "required|unique:blog__post_translations,slug,null,post_id,locale,$this->localeKey",
         ];
     }
 
