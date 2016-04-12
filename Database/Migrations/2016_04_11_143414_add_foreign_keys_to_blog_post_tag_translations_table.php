@@ -14,7 +14,7 @@ class AddForeignKeysToBlogPostTagTranslationsTable extends Migration {
 	{
 		Schema::table('blog_post_tag_translations', function(Blueprint $table)
 		{
-			$table->foreign('tag_id', 'tag_translations_tag_id')->references('id')->on('blog_post_tags')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('post_tag_id', 'tag_translations_tag_id')->references('id')->on('blog_post_tags')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 		});
 	}
 
