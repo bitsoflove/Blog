@@ -15,7 +15,7 @@ class Category extends Model {
     use \Illuminate\Database\Eloquent\SoftDeletes;
 
     use \Dimsav\Translatable\Translatable;
-    public $translatedAttributes = ["category_id","title", "slug"];
+    public $translatedAttributes = ["category_id","title"];
     public $translationModel = \Modules\Blog\Entities\CategoryTranslation::class;
 
 
