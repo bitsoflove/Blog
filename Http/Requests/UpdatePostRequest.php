@@ -1,4 +1,6 @@
-<?php namespace Modules\Blog\Http\Requests;
+<?php
+
+namespace Modules\Blog\Http\Requests;
 
 use Modules\Core\Internationalisation\BaseFormRequest;
 
@@ -14,8 +16,8 @@ class UpdatePostRequest extends BaseFormRequest
         $id = $this->route()->getParameter('post')->id;
 
         return [
-            "title" => "required",
-            "slug" => "required|unique:blog__post_translations,slug,$id,post_id,locale,$this->localeKey",
+            'title' => 'required',
+            'slug' => "required|unique:blog_post_translations,slug,$id,post_id,locale,$this->localeKey",
         ];
     }
 

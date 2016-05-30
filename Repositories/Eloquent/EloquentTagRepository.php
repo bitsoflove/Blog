@@ -1,4 +1,6 @@
-<?php namespace Modules\Blog\Repositories\Eloquent;
+<?php
+
+namespace Modules\Blog\Repositories\Eloquent;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\App;
@@ -8,8 +10,10 @@ use Modules\Core\Repositories\Eloquent\EloquentBaseRepository;
 class EloquentTagRepository extends EloquentBaseRepository implements TagRepository
 {
     /**
-     * Find a tag by its name
+     * Find a tag by its name.
+     *
      * @param $name
+     *
      * @return mixed
      */
     public function findByName($name)
@@ -39,9 +43,11 @@ class EloquentTagRepository extends EloquentBaseRepository implements TagReposit
     }
 
     /**
-     * Create the tag for the specified language
-     * @param  string $lang
-     * @param  array  $name
+     * Create the tag for the specified language.
+     *
+     * @param string $lang
+     * @param array  $name
+     *
      * @return mixed
      */
     public function createForLanguage($lang = 'en', $name)
@@ -49,7 +55,7 @@ class EloquentTagRepository extends EloquentBaseRepository implements TagReposit
         $data = [
             $lang => [
                 'title' => $name,
-                'slug' => ''
+                'slug' => '',
             ],
         ];
 

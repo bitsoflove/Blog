@@ -17,7 +17,7 @@
 @stop
 
 @section('content')
-{!! Form::open(['route' => ['admin.blog.post.store'], 'method' => 'post']) !!}
+{!! Form::open(['route' => ['admin.blog.post.store'], 'method' => 'post', 'files' => true]) !!}
 <div class="row">
     <div class="col-md-10">
         <div class="nav-tabs-custom">
@@ -25,7 +25,7 @@
             <div class="tab-content">
                 <?php $i = 0; ?>
                 <?php foreach (LaravelLocalization::getSupportedLocales() as $locale => $language): ?>
-                    <?php $i++; ?>
+                    <?php ++$i; ?>
                     <div class="tab-pane {{ App::getLocale() == $locale ? 'active' : '' }}" id="tab_{{ $i }}">
                         @include('blog::admin.posts.partials.create-fields', ['lang' => $locale])
                     </div>
@@ -63,6 +63,12 @@
                    <select name="tags[]" id="tags" class="input-tags" multiple></select>
                    {!! $errors->first("tags", '<span class="help-block">:message</span>') !!}
                 </div>
+
+                <div class="form-group">
+                    {!! Form::label("image", "Image:") !!}
+                    {!! Form::file('image') !!}
+                </div>
+
             </div>
         </div>
     </div>

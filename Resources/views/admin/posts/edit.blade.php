@@ -26,7 +26,7 @@
             <div class="tab-content">
                 <?php $i = 0; ?>
                 <?php foreach (LaravelLocalization::getSupportedLocales() as $locale => $language): ?>
-                    <?php $i++; ?>
+                    <?php ++$i; ?>
                     <div class="tab-pane {{ App::getLocale() == $locale ? 'active' : '' }}" id="tab_{{ $i }}">
                         @include('blog::admin.posts.partials.edit-fields', ['lang' => $locale])
                     </div>
@@ -74,11 +74,11 @@
                     </select>
                     {!! $errors->first("tags", '<span class="help-block">:message</span>') !!}
                 </div>
-                @include('media::admin.fields.file-link', [
-                    'entityClass' => 'Modules\\\\Blog\\\\Entities\\\\Post',
-                    'entityId' => $post->id,
-                    'zone' => 'thumbnail'
-                ])
+                {{-- @todo: implement edit function --}}
+                <div class="form-group">
+                    {!! Form::label("image", "Image:") !!}
+                    {!! Form::file('image') !!}
+                </div>
             </div>
         </div>
     </div>

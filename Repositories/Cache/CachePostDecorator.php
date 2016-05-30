@@ -1,4 +1,6 @@
-<?php namespace Modules\Blog\Repositories\Cache;
+<?php
+
+namespace Modules\Blog\Repositories\Cache;
 
 use Modules\Blog\Repositories\Collection;
 use Modules\Blog\Repositories\PostRepository;
@@ -14,8 +16,10 @@ class CachePostDecorator extends BaseCacheDecorator implements PostRepository
     }
 
     /**
-     * Return the latest x blog posts
+     * Return the latest x blog posts.
+     *
      * @param int $amount
+     *
      * @return Collection
      */
     public function latest($amount = 5)
@@ -30,8 +34,10 @@ class CachePostDecorator extends BaseCacheDecorator implements PostRepository
     }
 
     /**
-     * Get the previous post of the given post
+     * Get the previous post of the given post.
+     *
      * @param object $post
+     *
      * @return object
      */
     public function getPreviousOf($post)
@@ -48,8 +54,10 @@ class CachePostDecorator extends BaseCacheDecorator implements PostRepository
     }
 
     /**
-     * Get the next post of the given post
+     * Get the next post of the given post.
+     *
      * @param object $post
+     *
      * @return object
      */
     public function getNextOf($post)
@@ -61,6 +69,24 @@ class CachePostDecorator extends BaseCacheDecorator implements PostRepository
             ->remember("{$this->locale}.{$this->entityName}.getNextOf.{$postId}", $this->cacheTime,
                 function () use ($post) {
                     return $this->repository->getNextOf($post);
+                }
+            );
+    }
+
+    /**
+     * Return the latest x blog posts in the given language
+     *
+     * @param string $lang
+     * @param int $amount
+     * @return Collection
+     */
+    public function latestTranslatedIn($lang, $amount = 5)
+    {
+        return $this->cache
+            ->tags($this->entityName, 'global')
+            ->remember("{$this->locale}.{$this->entityName}.latestTranslatedIn.{$lang}.{$amount}", $this->cacheTime,
+                function () use ($lang, $amount) {
+                    return $this->repository->latestTranslatedIn($lang, $amount);
                 }
             );
     }

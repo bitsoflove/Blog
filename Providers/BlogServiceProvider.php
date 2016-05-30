@@ -1,4 +1,6 @@
-<?php namespace Modules\Blog\Providers;
+<?php
+
+namespace Modules\Blog\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Modules\Blog\Entities\Category;
@@ -25,8 +27,6 @@ class BlogServiceProvider extends ServiceProvider
 
     /**
      * Register the service provider.
-     *
-     * @return void
      */
     public function register()
     {
@@ -35,8 +35,8 @@ class BlogServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../Config/config.php', 'asgard.blog.config');
-        $this->publishes([__DIR__ . '/../Config/config.php' => config_path('asgard.blog.config' . '.php'), ], 'config');
+        $this->mergeConfigFrom(__DIR__.'/../Config/config.php', 'asgard.blog.config');
+        $this->publishes([__DIR__.'/../Config/config.php' => config_path('asgard.blog.config'.'.php')], 'config');
     }
 
     /**

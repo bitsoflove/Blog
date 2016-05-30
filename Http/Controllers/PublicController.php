@@ -1,4 +1,6 @@
-<?php namespace Modules\Blog\Http\Controllers;
+<?php
+
+namespace Modules\Blog\Http\Controllers;
 
 use Illuminate\Support\Facades\App;
 use Modules\Blog\Repositories\PostRepository;
@@ -21,13 +23,13 @@ class PublicController extends BasePublicController
     {
         $posts = $this->post->allTranslatedIn(App::getLocale());
 
-        return view('blog.index', compact('posts'));
+        return view('front.pages.blog.index', compact('posts'));
     }
 
     public function show($slug)
     {
         $post = $this->post->findBySlug($slug);
 
-        return view('blog.show', compact('post'));
+        return view('front.pages.blog.show', compact('post'));
     }
 }

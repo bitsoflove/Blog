@@ -24,7 +24,7 @@
                 <div class="tab-content">
                     <?php $i = 0; ?>
                     @foreach (LaravelLocalization::getSupportedLocales() as $locale => $language)
-                        <?php $i++; ?>
+                        <?php ++$i; ?>
                         <div class="tab-pane {{ locale() == $locale ? 'active' : '' }}" id="tab_{{ $i }}">
                             @include('blog::admin.tags.partials.create-fields', ['lang' => $locale])
                         </div>

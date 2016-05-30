@@ -20,7 +20,7 @@
             <div class="tab-content">
                 <?php $i = 0; ?>
                 <?php foreach (LaravelLocalization::getSupportedLocales() as $locale => $language): ?>
-                    <?php $i++; ?>
+                    <?php ++$i; ?>
                     <div class="tab-pane {{ App::getLocale() == $locale ? 'active' : '' }}" id="tab_{{ $i }}">
                         @include('blog::admin.categories.partials.edit-fields', ['lang' => $locale])
                     </div>

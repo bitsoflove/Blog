@@ -1,50 +1,89 @@
-<?php namespace Modules\Blog\Entities;
+<?php
 
+namespace Modules\Blog\Entities;
+
+use Dimsav\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Blog\Entities\Post;
+use Modules\Blog\Entities\Tag;
+use Modules\Blog\Entities\TagTranslation;
 
-class PostTag extends Model {
+class PostTag extends Model
+{
+    use Translatable;
 
     /**
-     * Generated
+     * @var string
      */
-
     protected $table = 'blog_post_tags';
-    protected $fillable = ['tag_id', 'post_id', 'id', 'title'];
 
-    
-    use \Dimsav\Translatable\Translatable;
-    public $translatedAttributes = ["tag_id","title"];
-    public $translationModel = \Modules\Blog\Entities\TagTranslation::class;
+    /**
+     * @var array
+     */
+    protected $fillable = [
+        'tag_id',
+        'post_id',
+        'id',
+        'title'
+    ];
 
+    /**
+     * @var array
+     */
+    public $translatedAttributes = [
+        'tag_id',
+        'title'
+    ];
 
+    /**
+     * @var
+     */
+    public $translationModel = TagTranslation::class;
 
-    public function post() {
-        return $this->belongsTo(\Modules\Blog\Entities\Post::class, 'post_id', 'id');
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function post()
+    {
+        return $this->belongsTo(Post::class, 'post_id', 'id');
     }
 
-    public function tag() {
-        return $this->belongsTo(\Modules\Blog\Entities\Tag::class, 'tag_id', 'id');
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function tag()
+    {
+        return $this->belongsTo(Tag::class, 'tag_id', 'id');
     }
 
-
-
-    public function update(array $attributes = []) {
+    /**
+     * @param array $attributes
+     * @return bool|int
+     */
+    public function update(array $attributes = [])
+    {
         $res = parent::update($attributes);
         self::sync($this, $attributes);
-        return $res;
-    }
 
-    public static function create(array $attributes = []) {
-        $res = parent::create($attributes);
-        self::sync($res, $attributes);
         return $res;
     }
 
     /**
-     * Sync many-to-many relationships
+     * @param array $attributes
+     * @return static
      */
-    private static function sync($model, array $attributes = []) {
-        
+    public static function create(array $attributes = [])
+    {
+        $res = parent::create($attributes);
+        self::sync($res, $attributes);
+
+        return $res;
     }
 
+    /**
+     * Sync many-to-many relationships.
+     */
+    private static function sync($model, array $attributes = [])
+    {
+    }
 }

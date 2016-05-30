@@ -1,4 +1,6 @@
-<?php namespace Modules\Blog\Http\Controllers\Admin;
+<?php
+
+namespace Modules\Blog\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Laracasts\Flash\Flash;
@@ -45,7 +47,8 @@ class TagController extends AdminBaseController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  Request $request
+     * @param Request $request
+     *
      * @return Response
      */
     public function store(Request $request)
@@ -60,7 +63,8 @@ class TagController extends AdminBaseController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  Tag $tag
+     * @param Tag $tag
+     *
      * @return Response
      */
     public function edit(Tag $tag)
@@ -71,8 +75,9 @@ class TagController extends AdminBaseController
     /**
      * Update the specified resource in storage.
      *
-     * @param  Tag $tag
-     * @param  Request $request
+     * @param Tag     $tag
+     * @param Request $request
+     *
      * @return Response
      */
     public function update(Tag $tag, Request $request)
@@ -87,7 +92,8 @@ class TagController extends AdminBaseController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  Tag $tag
+     * @param Tag $tag
+     *
      * @return Response
      */
     public function destroy(Tag $tag)

@@ -1,8 +1,9 @@
-<?php namespace Modules\Blog\Entities;
+<?php
+
+namespace Modules\Blog\Entities;
 
 /**
- * Class Status
- * @package Modules\Blog\Entities
+ * Class Status.
  */
 class Status
 {
@@ -27,7 +28,8 @@ class Status
     }
 
     /**
-     * Get the available statuses
+     * Get the available statuses.
+     *
      * @return array
      */
     public function lists()
@@ -36,8 +38,10 @@ class Status
     }
 
     /**
-     * Get the post status
+     * Get the post status.
+     *
      * @param int $statusId
+     *
      * @return string
      */
     public function get($statusId)

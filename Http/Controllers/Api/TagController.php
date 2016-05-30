@@ -1,4 +1,6 @@
-<?php namespace Modules\Blog\Http\Controllers\Api;
+<?php
+
+namespace Modules\Blog\Http\Controllers\Api;
 
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\App;
@@ -41,7 +43,8 @@ class TagController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  CreateTagRequest $request
+     * @param CreateTagRequest $request
+     *
      * @return Response
      */
     public function store(CreateTagRequest $request)
@@ -52,9 +55,10 @@ class TagController extends Controller
     }
 
     /**
-     * Find the resource by name
+     * Find the resource by name.
      *
      * @param $name
+     *
      * @return Response
      */
     public function findByName($name)

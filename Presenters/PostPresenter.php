@@ -1,4 +1,6 @@
-<?php namespace Modules\Blog\Presenters;
+<?php
+
+namespace Modules\Blog\Presenters;
 
 use Laracasts\Presenter\Presenter;
 use Modules\Blog\Entities\Status;
@@ -22,7 +24,8 @@ class PostPresenter extends Presenter
     }
 
     /**
-     * Get the previous post of the current post
+     * Get the previous post of the current post.
+     *
      * @return object
      */
     public function previous()
@@ -31,7 +34,8 @@ class PostPresenter extends Presenter
     }
 
     /**
-     * Get the next post of the current post
+     * Get the next post of the current post.
+     *
      * @return object
      */
     public function next()
@@ -40,7 +44,8 @@ class PostPresenter extends Presenter
     }
 
     /**
-     * Get the post status
+     * Get the post status.
+     *
      * @return string
      */
     public function status()
@@ -49,7 +54,8 @@ class PostPresenter extends Presenter
     }
 
     /**
-     * Getting the label class for the appropriate status
+     * Getting the label class for the appropriate status.
+     *
      * @return string
      */
     public function statusLabelClass()
@@ -71,5 +77,17 @@ class PostPresenter extends Presenter
                 return 'bg-red';
                 break;
         }
+    }
+
+    public function shortContent()
+    {
+        $content = strip_tags($this->content);
+        $content = trim(str_replace('&nbsp;', ' ', $content));
+
+        $content = explode(' ', $content);
+
+        return implode(" ", array_splice($content, 0,10));
+
+//        return str_limit($content, config('bitsoflove.mycar.blog.short-description.max-length', 200));
     }
 }

@@ -1,43 +1,67 @@
-<?php namespace Modules\Blog\Entities;
+<?php
+
+namespace Modules\Blog\Entities;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\Blog\Entities\Category;
 
-class CategoryTranslation extends Model {
+class CategoryTranslation extends Model
+{
+    use SoftDeletes;
+
 
     /**
-     * Generated
+     * @var string
      */
-
     protected $table = 'blog_category_translations';
-    protected $fillable = ['id', 'category_id', 'title', 'slug'];
 
-    use \Illuminate\Database\Eloquent\SoftDeletes;
+    /**
+     * @var array
+     */
+    protected $fillable = [
+        'id',
+        'category_id',
+        'title',
+        'slug'
+    ];
 
-
-
-    public function blogCategory() {
-        return $this->belongsTo(\Modules\Blog\Entities\Category::class, 'category_id', 'id');
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function blogCategory()
+    {
+        return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 
-
-
-    public function update(array $attributes = []) {
+    /**
+     * @param array $attributes
+     * @return bool|int
+     */
+    public function update(array $attributes = [])
+    {
         $res = parent::update($attributes);
         self::sync($this, $attributes);
-        return $res;
-    }
 
-    public static function create(array $attributes = []) {
-        $res = parent::create($attributes);
-        self::sync($res, $attributes);
         return $res;
     }
 
     /**
-     * Sync many-to-many relationships
+     * @param array $attributes
+     * @return static
      */
-    private static function sync($model, array $attributes = []) {
-        
+    public static function create(array $attributes = [])
+    {
+        $res = parent::create($attributes);
+        self::sync($res, $attributes);
+
+        return $res;
     }
 
+    /**
+     * Sync many-to-many relationships.
+     */
+    private static function sync($model, array $attributes = [])
+    {
+    }
 }
