@@ -1,4 +1,6 @@
-<?php namespace Modules\Blog\Tests;
+<?php
+
+namespace Modules\Blog\Tests;
 
 use Faker\Factory;
 use Illuminate\Support\Str;
@@ -29,7 +31,8 @@ abstract class BaseBlogTestCase extends BaseTestCase
     }
 
     /**
-     * Helper method to create a blog post
+     * Helper method to create a blog post.
+     *
      * @return object
      */
     public function createBlogPost()

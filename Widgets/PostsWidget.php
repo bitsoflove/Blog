@@ -1,4 +1,6 @@
-<?php namespace Modules\Blog\Widgets;
+<?php
+
+namespace Modules\Blog\Widgets;
 
 use Modules\Blog\Repositories\PostRepository;
 use Modules\Dashboard\Foundation\Widgets\BaseWidget;
@@ -16,7 +18,8 @@ class PostsWidget extends BaseWidget
     }
 
     /**
-     * Get the widget name
+     * Get the widget name.
+     *
      * @return string
      */
     protected function name()
@@ -25,7 +28,8 @@ class PostsWidget extends BaseWidget
     }
 
     /**
-     * Get the widget view
+     * Get the widget view.
+     *
      * @return string
      */
     protected function view()
@@ -34,7 +38,8 @@ class PostsWidget extends BaseWidget
     }
 
     /**
-     * Get the widget data to send to the view
+     * Get the widget data to send to the view.
+     *
      * @return string
      */
     protected function data()
@@ -42,8 +47,9 @@ class PostsWidget extends BaseWidget
         return ['postCount' => $this->post->all()->count()];
     }
 
-     /**
-     * Get the widget type
+    /**
+     * Get the widget type.
+     *
      * @return string
      */
     protected function options()
