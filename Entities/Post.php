@@ -152,12 +152,9 @@ class Post extends Model implements HasMediaConversions
         $res = parent::update($attributes);
         self::sync($this, $attributes);
 
-        if (
-            isset($attributes['image']) &&
-            $attributes['image'] instanceof UploadedFile
-        ) {
+        if (isset($attributes['images'])) {
             $this->clearImages();
-            $res->addImage($attributes['image']);
+            $this->addImages($attributes['images']);
         }
 
         return $res;
@@ -172,11 +169,8 @@ class Post extends Model implements HasMediaConversions
         $res = parent::create($attributes);
         self::sync($res, $attributes);
 
-        if (
-            isset($attributes['image']) &&
-            $attributes['image'] instanceof UploadedFile
-        ) {
-            $res->addImage($attributes['image']);
+        if (isset($attributes['images'])) {
+            $res->addImages($attributes['images']);
         }
 
         return $res;
@@ -193,20 +187,28 @@ class Post extends Model implements HasMediaConversions
     }
 
     /**
-     * Add an image to the Post entity
+     * Add images to the blog post
      *
-     * @param UploadedFile $image
-     * @param string $collection
-     * @return Post
+     * @param array $files
      */
-    public function addImage(UploadedFile $image, $collection = 'images')
+    public function addImages(array $files = [])
     {
-        $this->addMedia($image->getRealPath())
-            ->usingName($image->getClientOriginalName())
-            ->usingFileName($image->getClientOriginalName())
-            ->toMediaLibrary($collection);
+        array_walk($files, function ($file) {
+            // split the disk and the file
+            $segments = explode('::', $file);
 
-        return $this;
+            if (count($segments) !== 2) {
+                throw new \ErrorException('The file location should be in form disk::path');
+            }
+
+            list($disk, $file) = $segments;
+
+            $disk_path = \Storage::disk($disk)->getDriver()->getAdapter()->getPathPrefix();
+
+            $this->addMedia(rtrim($disk_path, "/") . DIRECTORY_SEPARATOR . $file)
+                ->usingFileName($file)// cleaner and better way of saving images?
+                ->toCollectionOnDisk('images', 'images-blog');
+        });
     }
 
     /**
