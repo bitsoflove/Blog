@@ -41,4 +41,15 @@ interface PostRepository extends BaseRepository
      * @return object
      */
     public function getNextOf($post);
+
+    /**
+     * Get a paginated list of translated resources
+     *
+     * @param string $lang
+     * @param int|null $per_page
+     * @param int $page
+     * @return \Illuminate\Support\Collection
+     */
+    public function allTranslatedInPaginated(string $lang, int $per_page = null, $page = 1);
+
 }

@@ -79,6 +79,27 @@ class EloquentPostRepository extends EloquentBaseRepository implements PostRepos
     }
 
     /**
+     * Return all resources in the given language.
+     *
+     * @param string $lang
+     *
+     * @param null|int $per_page
+     * @param int $page
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function allTranslatedInPaginated(string $lang, int $per_page = null, $page = 1)
+    {
+        if(is_null($per_page)){
+            $per_page = config('asgard.blog.config.overview.number-of-items', 15);
+        }
+
+        return $this->model->whereHas('translations', function (Builder $q) use ($lang) {
+            $q->where('locale', "$lang");
+            $q->where('title', '!=', '');
+        })->with('translations')->whereStatus(Status::PUBLISHED)->orderBy('created_at', 'desc')->paginate($per_page);
+    }
+
+    /**
      * Return the latest x blog posts.
      *
      * @param int $amount

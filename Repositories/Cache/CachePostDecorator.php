@@ -90,4 +90,23 @@ class CachePostDecorator extends BaseCacheDecorator implements PostRepository
                 }
             );
     }
+
+    /**
+     * Get a paginated list of translated resources
+     *
+     * @param string $lang
+     * @param int|null $per_page
+     * @return \Illuminate\Support\Collection
+     */
+    public function allTranslatedInPaginated(string $lang, int $per_page = null, $page = 1)
+    {
+        return $this->cache
+            ->tags($this->entityName, 'global')
+            ->remember("{$this->locale}.{$this->entityName}.allTranslatedInPaginated.{$lang}.{$per_page}.{$page}", $this->cacheTime,
+                function () use ($lang, $per_page, $page) {
+                    \Log::info("Refreshing blog {$lang}, {$per_page}, {$page}");
+                    return $this->repository->allTranslatedInPaginated($lang, $per_page);
+                }
+            );
+    }
 }
