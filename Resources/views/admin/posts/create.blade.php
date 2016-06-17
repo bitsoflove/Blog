@@ -3,6 +3,8 @@
 @section('styles')
 {!! Theme::script('js/vendor/ckeditor/ckeditor.js') !!}
 <link href="{{{ Module::asset('blog:css/selectize.css') }}}" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/min/dropzone.min.css">
+
 @stop
 
 @section('content-header')
@@ -64,10 +66,7 @@
                    {!! $errors->first("tags", '<span class="help-block">:message</span>') !!}
                 </div>
 
-                <div class="form-group">
-                    {!! Form::label("image", "Image:") !!}
-                    {!! Form::file('image') !!}
-                </div>
+                @include('blog::admin.posts.partials.image', ['lang' => $locale])
 
             </div>
         </div>
@@ -109,4 +108,11 @@
         });
     });
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/min/dropzone.min.js"></script>
+
+@if(env('WEBPACK_HOT'))
+    <script src="http://{{env('WEBPACK_HOST', 'localhost')}}:8090/admin-blog-post.js"></script>
+@else
+    <script src="/themes/mycar/scripts/admin-blog-post.js"></script>
+@endif
 @stop

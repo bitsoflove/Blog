@@ -3,6 +3,8 @@
 @section('styles')
 {!! Theme::script('js/vendor/ckeditor/ckeditor.js') !!}
 <link href="{{{ Module::asset('blog:css/selectize.css') }}}" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/min/dropzone.min.css">
+
 @stop
 
 @section('content-header')
@@ -17,7 +19,7 @@
 @stop
 
 @section('content')
-{!! Form::open(['route' => ['admin.blog.post.update', $post->id], 'method' => 'put']) !!}
+{!! Form::open(['route' => ['admin.blog.post.update', $post->id], 'method' => 'put', 'files' => true]) !!}
 
 <div class="row">
     <div class="col-md-10">
@@ -74,11 +76,9 @@
                     </select>
                     {!! $errors->first("tags", '<span class="help-block">:message</span>') !!}
                 </div>
-                {{-- @todo: implement edit function --}}
-                <div class="form-group">
-                    {!! Form::label("image", "Image:") !!}
-                    {!! Form::file('image') !!}
-                </div>
+
+                @include('blog::admin.posts.partials.image', ['lang' => $locale])
+
             </div>
         </div>
     </div>
@@ -121,4 +121,12 @@
         });
     });
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/min/dropzone.min.js"></script>
+
+@if(env('WEBPACK_HOT'))
+    <script src="http://{{env('WEBPACK_HOST', 'localhost')}}:8090/admin-blog-post.js"></script>
+@else
+    <script src="/themes/mycar/scripts/admin-blog-post.js"></script>
+@endif
+
 @stop
