@@ -9,4 +9,7 @@ return [
     'latest-posts' => [
         'blog.*',
     ],
+    'overview' => [
+        'number-of-items' => 15,
+    ],
 ];
