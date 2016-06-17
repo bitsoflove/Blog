@@ -2,6 +2,7 @@
 
 namespace Modules\Blog\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Modules\Blog\Repositories\PostRepository;
 use Modules\Core\Http\Controllers\BasePublicController;
@@ -19,9 +20,15 @@ class PublicController extends BasePublicController
         $this->post = $post;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $posts = $this->post->allTranslatedIn(App::getLocale());
+        // determine the number of blog items should be shown on the page
+        $per_page = intval($request->get('per-page', 15));
+
+        // determine the current page
+        $page = intval($request->get('page', 1));
+
+        $posts = $this->post->allTranslatedInPaginated(App::getLocale(), $per_page, $page);
 
         return view('front.pages.blog.index', compact('posts'));
     }
