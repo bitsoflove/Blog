@@ -144,6 +144,53 @@ class Post extends Model implements HasMediaConversions
     }
 
     /**
+     * @return array
+     */
+    public function getImagesAttribute(){
+        $conversions = [
+            'thumb',
+        ];
+
+        if (!$this->hasMedia('images')) {
+            return $this->createDefaultImageStructure($conversions);
+        }
+
+        $data = [];
+
+        $data['images'] = $this->getMedia('images')->map(function ($media) {
+            return $media->getUrl();
+        })->toArray();
+
+        foreach ($conversions as $conversion) {
+            $data[str_plural($conversion)] = $this->getMedia('images')->map(function ($media) use ($conversion) {
+                return $media->getUrl($conversion);
+            })->toArray();
+        }
+
+        return $data;
+    }
+
+    /**
+     * @param array $conversions
+     * @return array
+     */
+    private function createDefaultImageStructure($conversions){
+        $data = [
+            'images' => [
+                config('bitsoflove.mycar.images.placeholder.blog.no_conversion', config('bitsoflove.mycar.images.placeholder.default.no_conversion',""))
+            ],
+        ];
+
+        foreach ($conversions as $conversion) {
+            $data[str_plural($conversion)] = [
+                config('bitsoflove.mycar.images.placeholder.blog.' . $conversion, config('bitsoflove.mycar.images.placeholder.default.' . $conversion,""))
+            ];
+        }
+
+        return $data;
+    }
+
+    /**
      * @param array $attributes
      * @return bool|int
      */
@@ -231,7 +278,7 @@ class Post extends Model implements HasMediaConversions
     public function registerMediaConversions()
     {
         $this->addMediaConversion('thumb')
-            ->setManipulations(['w' => 368, 'h' => 232])
+            ->setManipulations(['w' => 290, 'h' => 290, 'fit' => 'crop'])
             ->performOnCollections('images');
     }
 }
