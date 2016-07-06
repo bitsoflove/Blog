@@ -84,10 +84,6 @@ class PostPresenter extends Presenter
         $content = strip_tags($this->content);
         $content = trim(str_replace('&nbsp;', ' ', $content));
 
-        $content = explode(' ', $content);
-
-        return implode(" ", array_splice($content, 0,10));
-
-//        return str_limit($content, config('bitsoflove.mycar.blog.short-description.max-length', 200));
+        return str_limit($content, 80);
     }
 }
