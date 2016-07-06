@@ -280,5 +280,9 @@ class Post extends Model implements HasMediaConversions
         $this->addMediaConversion('thumb')
             ->setManipulations(['w' => 290, 'h' => 290, 'fit' => 'crop'])
             ->performOnCollections('images');
+
+        $this->addMediaConversion('vertical_thumb')
+            ->setManipulations(['w' => 540, 'h' => 354, 'fit' => 'crop'])
+            ->performOnCollections('images');
     }
 }
