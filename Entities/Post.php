@@ -149,6 +149,7 @@ class Post extends Model implements HasMediaConversions
     public function getImagesAttribute(){
         $conversions = [
             'thumb',
+            'vertical_thumb',
         ];
 
         if (!$this->hasMedia('images')) {
