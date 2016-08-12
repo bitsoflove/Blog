@@ -86,4 +86,12 @@ class PostPresenter extends Presenter
 
         return str_limit($content, 80);
     }
+    
+    public function mediumContent()
+    {
+        $content = strip_tags($this->content);
+        $content = trim(str_replace('&nbsp;', ' ', $content));
+
+        return str_limit($content, 200);
+    }
 }
