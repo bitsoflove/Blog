@@ -79,8 +79,9 @@ class EloquentPostRepository extends EloquentBaseRepository implements PostRepos
         return $this->model->whereStatus(Status::PUBLISHED)->orderBy('created_at', 'desc')->take($amount)->get();
     }
 
-    /**
+   /**
      * Get the previous post of the given post
+     *
      * @param object $post
      * @return object
      */
@@ -92,6 +93,7 @@ class EloquentPostRepository extends EloquentBaseRepository implements PostRepos
 
     /**
      * Get the next post of the given post
+     * 
      * @param object $post
      * @return object
      */
