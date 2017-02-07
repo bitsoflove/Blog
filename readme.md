@@ -46,3 +46,8 @@ Followed by a composer update
 ## Info
 
 All AsgardCMS modules respect [Semantic Versioning](http://semver.org/).
+
+
+---
+    
+<a href="https://rollbar.com"><img src="https://rollbar.com/assets/badges/rollbar-partner-badge-dark.png" alt="Rollbar Error Tracking" /></a>
